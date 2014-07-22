@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -13,6 +14,18 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use(session({secret:"wotclans"}));
+
+app.all('*', function(req, res, next){
+    if (req.originalUrl != '/' && req.session.huj == undefined) {
+        var err = new Error('Not Authorized');
+        err.status = 401;
+        next(err);
+    } else {
+        next();
+    }
+});
 
 app.use(favicon());
 app.use(logger('dev'));
