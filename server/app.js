@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -17,7 +18,7 @@ app.set('view engine', 'jade');
 
 app.use(session({secret:"wotclans"}));
 
-app.all('*', function(req, res, next){
+/*app.all('*', function(req, res, next){
     if (req.originalUrl != '/' && req.session.huj == undefined) {
         var err = new Error('Not Authorized');
         err.status = 401;
@@ -25,7 +26,7 @@ app.all('*', function(req, res, next){
     } else {
         next();
     }
-});
+});*/
 
 app.use(favicon());
 app.use(logger('dev'));
