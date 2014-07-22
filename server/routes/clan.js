@@ -10,7 +10,7 @@ router.param('clan_id', function(req, res, next, id){
 
 /* GET clan listing. */
 router.get('/:clan_id', function(req, res) {
-    wotapi.clan(req.id, function(response){
+    wotapi.clan(req.clan_id, function(response){
         res.json(response);
     });
 });
