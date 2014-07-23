@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var wotapi = require('wot-api');
-
 router.param('clan_id', function(req, res, next, id){
     req.clan_id = id;
     next();
@@ -10,7 +8,7 @@ router.param('clan_id', function(req, res, next, id){
 
 /* GET clan listing. */
 router.get('/:clan_id', function(req, res) {
-    wotapi.clan(req.clan_id, function(response){
+    req.wotapi.clan(req.clan_id, function(response){
         res.json(response);
     });
 });

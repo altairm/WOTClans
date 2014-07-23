@@ -5,6 +5,8 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config.js');
+var wotapi = require('wot-api');
 
 
 var routes = require('./routes/index');
@@ -17,27 +19,33 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(session({
-    secret:"wotclans",
+    secret: "wotclans",
     saveUninitialized: true,
     resave: true
 }));
-
-/*app.all('*', function(req, res, next){
-    if (req.originalUrl != '/' && req.session.huj == undefined) {
-        var err = new Error('Not Authorized');
-        err.status = 401;
-        next(err);
-    } else {
-        next();
-    }
-});*/
-
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+    req.config = config;
+    wotapi.host = config.wot.api.host;
+    wotapi.form.application_id = config.wot.api.application_id;
+    req.wotapi = wotapi;
+    next();
+});
+
+/*app.all('*', function(req, res, next){
+ if (req.originalUrl != '/' && req.session.huj == undefined) {
+ var err = new Error('Not Authorized');
+ err.status = 401;
+ next(err);
+ } else {
+ next();
+ }
+ });*/
 
 app.use('/', routes);
 app.use('/users', users);
