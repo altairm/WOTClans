@@ -16,7 +16,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(session({secret:"wotclans"}));
+app.use(session({
+    secret:"wotclans",
+    saveUninitialized: true,
+    resave: true
+}));
 
 /*app.all('*', function(req, res, next){
     if (req.originalUrl != '/' && req.session.huj == undefined) {
