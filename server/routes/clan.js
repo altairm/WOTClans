@@ -35,6 +35,8 @@ router.get('/:clan_id', function(req, res) {
                 }
                 res.json(clan);
             });
+        } else {
+            res.json(clan);
         }
     });
 });
