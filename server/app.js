@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
     req.config = config;
     wotapi.host = config.wot.api.host;
-    wotapi.form.application_id = config.wot.api.application_id;
+    wotapi.application_id = config.wot.api.application_id;
     req.wotapi = wotapi;
     next();
 });
