@@ -1,16 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.param('clan_id', function(req, res, next, id){
-    req.clan_id = id;
-    next();
-});
-
 /* GET clan listing. */
 router.get('/:clan_id', function(req, res) {
-    req.wotapi.clan(req.clan_id, function(clan){
+    req.wotapi.clan(req.params.clan_id, function(clan){
         if (clan.status == "ok") {
-            var members = clan.data[req.clan_id].members || {};
+            var members = clan.data[req.params.clan_id].members || {};
             var ids = [];
             for (member_id in members) {
                 if (members.hasOwnProperty(member_id)) {
