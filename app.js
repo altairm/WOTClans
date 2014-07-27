@@ -9,8 +9,9 @@ var config = require('./config.js');
 var wotapi = require('wot-api');
 
 
-var clan = require('./routes/clan');
-var account = require('./routes/account');
+var clan = require('./routes/api/clan');
+var account = require('./routes/api/account');
+var index = require('./routes/client/index');
 var app = express();
 
 // view engine setup
@@ -48,6 +49,7 @@ app.use(function(req, res, next) {
 
 app.use('/account', account);
 app.use('/clan', clan);
+app.use('/', index);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
