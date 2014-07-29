@@ -17,14 +17,11 @@ router.get('/:clan_id', function(req, res) {
                     var accounts = clan_members.data || {};
                     for (account_id in accounts) {
                         if (accounts.hasOwnProperty(account_id) && members.hasOwnProperty(account_id)) {
-                            Object.prototype.extend = function(obj) {
-                                for(property in obj) {
-                                    if (obj.hasOwnProperty(property)) {
-                                        this[property] = obj[property];
-                                    }
+                            for(property in accounts[account_id]) {
+                                if (accounts[account_id].hasOwnProperty(property)) {
+                                    members[account_id][property] = accounts[account_id][property];
                                 }
-                            };
-                            members[account_id].extend(accounts[account_id]);
+                            }
                         }
                     }
                 }
