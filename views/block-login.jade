@@ -1,0 +1,24 @@
+block-login
+    - var user = {username: 'develop'}
+    if user
+        .asd
+            p.navbar-text Signed in as
+            button.btn.btn-default.navbar-btn.dropdown-toggle(data-toggle="dropdown")
+                b= user.username + " "
+                span.caret
+            ul.dropdown-menu
+                li.dropdown-header Some options
+                li
+                    a(href="#") Action 1
+                li
+                    a(href="#") Action 2
+                li
+                    a(href="#") Action 3
+                li.divider
+                li.dropdown-header Some other options
+                li
+                    a(href="#") Action 4
+                li
+                    a(href="#") Action 5
+    else
+        button.btn.btn-default.navbar-btn.cmd-login(type='button') Sign in
