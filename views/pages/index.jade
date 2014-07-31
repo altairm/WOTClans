@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+    include ../blocks/head
+    body
+        nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+            .container
+                .nav.navbar-nav.navbar-left
+                    a.navbar-brand(href='/') WOTClans
+                    //
+                        NAVBAR
+                .nav.navbar-nav.navbar-right
+                    include ../blocks/login
+        .main-container
+            .container-fluid
+                block content
+
+        include ../blocks/templates
+
+    include ../blocks/footer

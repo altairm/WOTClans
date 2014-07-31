@@ -1,0 +1,27 @@
+block-login
+    .block-login
+        if user && user.authorized
+            p.navbar-text Signed in as
+            button.btn.btn-default.navbar-btn.dropdown-toggle(data-toggle="dropdown")
+                b= user.nickname + " "
+                span.caret
+            ul.dropdown-menu
+                li.dropdown-header Some options
+                li
+                    a(href="#") Action 1
+                li
+                    a(href="#") Action 2
+                li
+                    a(href="#") Action 3
+                li.divider
+                li.dropdown-header Some other options
+                li
+                    a(href="#") Action 4
+                li
+                    a(href="#") Action 5
+                li.divider
+                li.text-right
+                    a(href="/logout") Logout
+        else
+            a.btn.btn-default.navbar-btn.cmd-login-test(role='button', href="/login/test") Simulate login
+            a.btn.btn-default.navbar-btn.cmd-login(role='button', href="/login") Sign in

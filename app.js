@@ -10,8 +10,13 @@ var
     , wotapi = require('wot-api')
 
 // Routes
+    // API
     , clan = require('./routes/api/clan')
     , account = require('./routes/api/account')
+    , login = require('./routes/api/login')
+    , logout = require('./routes/api/logout')
+
+    // Client
     , index = require('./routes/client/index')
     ;
 
@@ -22,14 +27,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(session({
-    secret: "wotclans",
+    secret:            "wotclans",
     saveUninitialized: true,
-    resave: true
+    resave:            true
 }));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -41,9 +48,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 app.use('/account', account);
 app.use('/clan', clan);
+app.use('/login', login);
+app.use('/logout', logout);
 app.use('/', index);
 
 /**
@@ -62,9 +70,9 @@ app.use(function (req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('pages/error', {
             message: err.message,
-            error: err
+            error:   err
         });
     });
 }
@@ -73,9 +81,9 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('pages/error', {
         message: err.message,
-        error: {}
+        error:   {}
     });
 });
 
