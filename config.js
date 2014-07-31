@@ -7,7 +7,7 @@ var config = {
     },
 
     api: {
-        login_result: "http://wot.mtm.mx/login/check"
+        login_result: "http://wot.mtm.mx/login/result"
     }
 };
 module.exports = config;
