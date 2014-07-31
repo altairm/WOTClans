@@ -23,14 +23,14 @@ router.get('/test', function (req, res) {
 
 // Process OpenID login result
 router.get('/result', function (req, res) {
-    if (req.params.status == "ok") {
+    if (req.query.status && req.query.status == "ok") {
         // Login successful, set user session
         req.session.user = {
             authorized:   true,
-            access_token: req.params.access_token,
-            expires_at:   req.params.expires_at,
-            account_id:   req.params.account_id,
-            nickname:     req.params.nickname
+            access_token: req.query.access_token,
+            expires_at:   req.query.expires_at,
+            account_id:   req.query.account_id,
+            nickname:     req.query.nickname
         };
 
         res.redirect('/');
