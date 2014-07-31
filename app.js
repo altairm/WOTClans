@@ -10,13 +10,13 @@ var
     , wotapi = require('wot-api')
 
 // Routes
-    // API
+// API
     , clan = require('./routes/api/clan')
     , account = require('./routes/api/account')
     , login = require('./routes/api/login')
     , logout = require('./routes/api/logout')
 
-    // Client
+// Client
     , index = require('./routes/client/index')
     ;
 
@@ -27,9 +27,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(session({
-    secret:            "wotclans",
+    secret: "wotclans",
     saveUninitialized: true,
-    resave:            true
+    resave: true
 }));
 
 app.use(logger('dev'));
@@ -42,9 +42,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
     req.config = config;
-    wotapi.host = config.wot.api.host;
-    wotapi.application_id = config.wot.api.application_id;
+    wotapi.config = config.wot;
     req.wotapi = wotapi;
+    next();
+});
+
+
+// Check session and invalidate user if token has passed its due.
+// Note: UTC unit of time is one second.
+app.use(function (req, res, next) {
+    if ((!req.session.user || !req.session.user.authorized || !req.session.user.expires_at) ||
+        (parseInt(req.session.user.expires_at) <= parseInt(new Date().getTime()/1000))) {
+        req.session.user = {
+            authorized: false
+        }
+    }
     next();
 });
 
@@ -72,7 +84,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('pages/error', {
             message: err.message,
-            error:   err
+            error: err
         });
     });
 }
@@ -83,7 +95,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error', {
         message: err.message,
-        error:   {}
+        error: {}
     });
 });
 
