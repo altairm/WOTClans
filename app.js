@@ -4,14 +4,15 @@ var
     , session = require('express-session')
     , http = require('http')
     , https = require('https')
-    , debug = require('debug')('server')
     , path = require('path')
     , logger = require('morgan')
     , cookieParser = require('cookie-parser')
     , bodyParser = require('body-parser')
-    , config = require('./config.js')
-    , wotapi = require('wot-api')
     , MongoClient = require('mongodb').MongoClient
+    , wotapi = require('wot-api')
+
+    // Config
+    , config = require('./config.js')
 
 // Routes
 // API
@@ -25,8 +26,7 @@ var
     ;
 
 var app = express(),
-    db,
-    server;
+    db;
 
 // Start the DB connection and the server
 MongoClient.connect("mongodb://" + config.db.host + ":" + config.db.port + "/" + config.db.database, function (err, database) {
@@ -53,9 +53,10 @@ MongoClient.connect("mongodb://" + config.db.host + ":" + config.db.port + "/" +
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.use(function (req, res, next) {
+        wotapi.config = config.wot;
+
         req.db = db;
         req.config = config;
-        wotapi.config = config.wot;
         req.wotapi = wotapi;
         next();
     });

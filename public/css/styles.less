@@ -51,8 +51,35 @@ nav {
   .centered-div;
   width: @content-width;
 
-  table td {
-    border: none !important;
+  .abbr {
+    &:before {
+      content: '[';
+    }
+    &:after {
+      content: ']';
+    }
+  }
+
+  .clan-logo {
+    margin: 4px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 20px rgb(0, 0, 0);
+  }
+
+  .clan-name {
+    font-family: "WarHeliosCondC", "Arial Narrow", Arial, sans-serif;
+    font-size: 2em;
+  }
+
+  .clan-motto {
+    font-family: "WarHeliosCondC", "Arial Narrow", Arial, sans-serif;
+    font-size: 1.3em;
+  }
+
+  table {
+    &.clan-personnel {
+      border-radius: 5px;
+    }
   }
 }
 

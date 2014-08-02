@@ -11,7 +11,7 @@ router.get('/test', function (req, res) {
         authorized: true,
         access_token: "9bf411b617b9c3d66110936989c9ea5a",
         expires_at: "2506848250",
-        account_id: "99999999",
+        account_id: 80865,
         nickname: "Demo user"
     };
 
@@ -26,7 +26,7 @@ router.get('/result', function (req, res) {
             authorized: true,
             access_token: req.query.access_token,
             expires_at: req.query.expires_at,
-            account_id: req.query.account_id,
+            account_id: parseInt(req.query.account_id),
             nickname: req.query.nickname
         };
 

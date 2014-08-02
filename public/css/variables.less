@@ -27,3 +27,54 @@
   background-color: rgba(98, 196, 98, 0.5);
   border-color: rgba(98, 189, 79, 0.5);
 }
+
+.clan-name {
+  text-shadow: 2px 2px 20px rgb(0, 0, 0);
+
+  .abbr {
+    color: rgb(255, 255, 255);
+
+    &:before, &:after {
+      color: rgb(225, 128, 0);
+    }
+  }
+
+  .name {
+    color: rgb(249, 208, 136);
+  }
+}
+
+.clan-motto {
+  text-shadow: 2px 2px 20px rgb(0, 0, 0);
+}
+
+table {
+  th.left, td.left {
+    text-align: left;
+  }
+
+  th.centered, td.centered {
+    text-align: center;
+  }
+
+  th.right, td.right {
+    text-align: right;
+  }
+
+
+  &.clan-personnel {
+    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+
+    tr {
+      &.leader td.member_role {
+        color: rgb(255, 195, 100);
+      }
+      &.vice_leader td.member_role {
+        color: rgb(255, 220, 164);
+      }
+    }
+  }
+}
+

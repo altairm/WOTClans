@@ -2,37 +2,35 @@ extends ../index
 
 block content
     .row
-        .col-md-10.col-md-push-2 LOGO
-        .col-md-2.col-md-pull-10 clan tag and name
-    .row
-        table.table.table-striped
-            thead
-                tr
-                    td No.
-                    td Name
-                    td Position
-            tbody
-                tr
-                    td 1
-                    td John
-                    td Soldier
-                tr
-                    td 2
-                    td Jack
-                    td Soldier
-                tr
-                    td 3
-                    td Jill
-                    td Soldier
-                tr
-                    td 4
-                    td Jones
-                    td Commander
-                tr
-                    td 5
-                    td James
-                    td Soldier
-                tr
-                    td 6
-                    td Jade
-                    td Deputy Commander
+        .col-md-11.col-md-offset-1
+            .row
+                .col-md-1
+                    img.clan-logo(alt=clan.name, src=clan.emblems.large)
+                .col-md-9
+                    .clan-name
+                        span.abbr= clan.abbreviation
+                        span.name!= '&nbsp;' + clan.name
+                    .clan-motto= clan.motto
+            .row
+                .col-md-10 &nbsp;
+            .row
+                .col-md-10!= clan.description_html
+            .row
+                .col-md-10 &nbsp;
+            .row
+                .col-md-10
+                    table.table.table-striped.table-hover.clan-personnel
+                        thead
+                            tr
+                                th.centered №
+                                th Имя
+                                th Должность
+                                th Дата вступления
+                        tbody
+                            - var index = 1
+                            each member_data, member_id in clan.members
+                                tr(class=member_data.role)
+                                    td.centered= index++
+                                    td.member_name= member_data.account_name
+                                    td.member_role= member_data.role_i18n
+                                    td.member_joined= member_data.created_at

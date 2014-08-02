@@ -1,9 +1,9 @@
 block-login
     .block-login
-        if user && user.authorized
-            p.navbar-text Signed in as
+        if session && session.user && session.user.authorized
+            p.navbar-text Добро пожаловать,
             button.btn.btn-default.navbar-btn.dropdown-toggle(data-toggle="dropdown")
-                b= user.nickname + " "
+                b= session.user.nickname + " "
                 span.caret
             ul.dropdown-menu
                 li.dropdown-header Some options
