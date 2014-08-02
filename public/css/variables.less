@@ -8,6 +8,28 @@
 
 @bg-color-main: rgba(35, 43, 48, 0.7);
 
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+.centered-div {
+  margin: 0 auto 0 auto;
+}
+
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+
+
+
 .alert-danger {
   background-color: rgba(238, 95, 91, 0.5);
   border-color: rgba(237, 77, 99, 0.5);
@@ -50,15 +72,15 @@
 
 table {
   th.left, td.left {
-    text-align: left;
+    .text-left;
   }
 
   th.centered, td.centered {
-    text-align: center;
+    .text-center;
   }
 
   th.right, td.right {
-    text-align: right;
+    .text-right;
   }
 
 

@@ -1,27 +1,29 @@
 block-login
     .block-login
-        if session && session.user && session.user.authorized
-            p.navbar-text Добро пожаловать,
-            button.btn.btn-default.navbar-btn.dropdown-toggle(data-toggle="dropdown")
-                b= session.user.nickname + " "
-                span.caret
-            ul.dropdown-menu
-                li.dropdown-header Some options
-                li
-                    a(href="#") Action 1
-                li
-                    a(href="#") Action 2
-                li
-                    a(href="#") Action 3
-                li.divider
-                li.dropdown-header Some other options
-                li
-                    a(href="#") Action 4
-                li
-                    a(href="#") Action 5
-                li.divider
-                li.text-right
-                    a(href="/logout") Logout
-        else
-            a.btn.btn-default.navbar-btn.cmd-login-test(role='button', href="/login/test") Simulate login
-            a.btn.btn-default.navbar-btn.cmd-login(role='button', href="/login") Sign in
+            ul.nav.navbar-nav.navbar-right
+                if session && session.user && session.user.authorized
+                    li
+                        li.dropdown
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                | #{session.user.nickname}&nbsp;&nbsp;
+                                b.caret
+                            ul.dropdown-menu
+                                li.dropdown-header Some options
+                                li
+                                    a(href='#') Action
+                                li
+                                    a(href='#') Another action
+                                li
+                                    a(href='#') Something else here
+                                li.divider
+                                li.dropdown-header Some other options
+                                li.text-right
+                                    a(href="/logout") Logout
+                else
+                    li
+                        a(href="/login/test") Simulate login
+                    li
+                        a(href="/login") Sign in
+
+
+
