@@ -30,4 +30,7 @@ var config = {
         }
     }
 };
+if (fs.existsSync('./local.config.js')) {
+    require('./local.config.js')(config);
+}
 module.exports = config;
